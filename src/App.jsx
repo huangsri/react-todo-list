@@ -28,15 +28,13 @@ class App extends Component {
     this.setState({ lists: newList });
   };
 
-  handleDelete = index => {
-    const newLists = [
-      ...this.state.lists.slice(0, index),
-      ...this.state.lists.slice(index + 1)
-    ];
+  handleDelete = id => {
+    const newLists = this.state.lists.filter(list => list.id !== id);
     this.setState({ lists: newLists });
   };
 
   handleSubmit = value => {
+    if (!value) return;
     const newLists = this.state.lists;
     const newId = this.state.lastId + 1;
     newLists.push({ title: value, isComplete: false, id: newId });
