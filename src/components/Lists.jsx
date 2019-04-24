@@ -3,26 +3,26 @@ import React from "react";
 import ListItem from "./ListItem";
 
 export default props => {
-  const lists = props.data.map(data => (
+  const lists = props.data.map((data, idx) => (
     <ListItem
       data={data}
       key={data.id}
-      index={data.id}
       isComplete={data.isComplete}
-      handleToggle={() => props.handleToggle(data.id)}
+      handleChange={value => props.handleChange(idx, value)}
+      handleToggle={() => props.handleToggle(data.id, idx)}
       handleDelete={() => props.handleDelete(data.id)}
     />
   ));
 
   const filteredList = props.data
     .filter(data => data.isComplete)
-    .map(data => (
+    .map((data, idx) => (
       <ListItem
         data={data}
         key={data.id}
-        index={data.id}
         isComplete={data.isComplete}
-        handleToggle={() => props.handleToggle(data.id)}
+        handleChange={value => props.handleChange(idx, value)}
+        handleToggle={() => props.handleToggle(data.id, idx)}
         handleDelete={() => props.handleDelete(data.id)}
       />
     ));

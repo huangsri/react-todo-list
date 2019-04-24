@@ -16,11 +16,16 @@ class App extends Component {
     lastId: 3
   };
 
-  handleToggle = index => {
+  handleToggle = (id, idx) => {
     const { lists } = this.state;
-    lists[index].isComplete = !this.state.lists[index].isComplete;
-    this.setState({ lists });
-    console.table(this.state.lists);
+    const [editedItem] = lists.filter(list => list.id === id);
+    editedItem.isComplete = !editedItem.idComplete;
+    const newList = [
+      ...this.state.lists.slice(0, idx),
+      editedItem,
+      ...this.state.lists.slice(idx + 1)
+    ];
+    this.setState({ lists: newList });
   };
 
   handleDelete = index => {
@@ -39,8 +44,18 @@ class App extends Component {
   };
 
   handleShowComplete = () => {
-    console.table(this.state.lists);
     this.setState({ showCompleted: !this.state.showCompleted });
+  };
+
+  handleChange = (idx, value) => {
+    const editedItem = this.state.lists[idx];
+    editedItem.title = value;
+    const newList = [
+      ...this.state.lists.slice(0, idx),
+      editedItem,
+      ...this.state.lists.slice(idx + 1)
+    ];
+    this.setState({ lists: newList });
   };
 
   render() {
@@ -53,8 +68,9 @@ class App extends Component {
         <NewItem handleSubmit={this.handleSubmit} />
         <Lists
           data={this.state.lists}
-          handleToggle={index => this.handleToggle(index)}
-          handleDelete={index => this.handleDelete(index)}
+          handleToggle={(id, idx) => this.handleToggle(id, idx)}
+          handleDelete={id => this.handleDelete(id)}
+          handleChange={(idx, value) => this.handleChange(idx, value)}
           showCompleted={this.state.showCompleted}
         />
       </div>

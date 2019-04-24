@@ -7,10 +7,15 @@ export default props => {
     <div className="item">
       <input
         type="checkbox"
-        onChange={() => props.handleToggle(props.index)}
+        onChange={props.handleToggle}
         checked={props.data.isComplete}
       />
-      <li className={className}>{props.data.title}</li>
+      <input
+        className="item list"
+        type="text"
+        value={props.data.title}
+        onChange={e => props.handleChange(e.target.value)}
+      />
       <button onClick={props.handleDelete}>X</button>
     </div>
   );

@@ -38,12 +38,15 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(119, 119, 119, 0.445);
+  margin-top: 5px;
 }
 
-.item li {
+.item.list {
   flex: 1;
-  margin-left: 5px;
+  margin: 0 0 5px 10px;
+  border: none;
   text-align: start;
+  outline: none;
 }
 
 .complete {

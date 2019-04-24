@@ -20,6 +20,7 @@ export default class NewItem extends Component {
       <form onSubmit={this.handleSubmit}>
         <input
           type="text"
+          placeholder=" Input new task"
           onChange={this.handleChange}
           value={this.state.value}
         />
